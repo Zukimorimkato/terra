@@ -1,22 +1,14 @@
-variable "sel_account" {
-default = "238183"
-}
+variable "sel_account" {}
 
-variable "sel_token" {
-default = "TNwGqgCkchJ9lqA1dpPaddFoH_238183"
-}
+variable "sel_token" {}
 
 variable "project_name" {
   default = "tf_test"
 }
 
-variable "user_name" {
-  default = "kaas"
-}
+variable "user_name" {}
 
-variable "user_password" {
-default = "38rablanar"
-}
+variable "user_password" {}
 
 variable "keypair_name" {
   default = "tf_keypair"

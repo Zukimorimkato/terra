@@ -101,7 +101,7 @@ resource "openstack_compute_instance_v2" "instance_1" {
 ]
 }
   provisioner "file" {
-    content     = "Kokorin $Link"
+    content     = "<h1>Kokorin https://github.com/Zukimorimkato/terra</h1>"
     destination = "/var/www/html/index.html"
   }
 }
