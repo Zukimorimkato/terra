@@ -5,7 +5,7 @@ provider "selectel" {
 
 # Создание проекта, пользователя и роли
 module "selectel_section" {
-  source = "../../test/modules/vpc/project_with_user"
+  source = "../../terra/modules/vpc/project_with_user"
 
   project_name  = var.project_name
   user_name     = var.user_name
@@ -25,7 +25,7 @@ provider "openstack" {
 
 # Создание ресурсов Openstack
 module "server_remote_root_disk" {
-  source = "../../test/modules/vpc/server_remote_root_disk"
+  source = "../../terra/modules/vpc/server_remote_root_disk"
 
   server_name         = var.server_name
   server_zone         = var.server_zone
