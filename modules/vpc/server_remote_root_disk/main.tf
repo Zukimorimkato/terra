@@ -92,23 +92,15 @@ resource "openstack_compute_instance_v2" "instance_1" {
    host = module.floatingip.floatingip_address
    private_key = "${file("~/.ssh/id_rsa")}"
 }
-# Working method, needs another one
-#  provisioner "remote-exec" {
-#  inline = [
-#"sudo apt-get -y update",
-#"sudo apt-get -y install nginx",
-#"sudo service nginx start",
-#"rm -rf /var/www/html/index.html"
-#]
-#}
-  provisioner "file" {
-    content     = "init.sh"
+
+ provisioner "file" {
+    source = "../../terra/modules/vpc/server_remote_root_disk/init.sh"
     destination = "/tmp/init.sh"
   }
-}
-provisioner "remote-exec" {
+ provisioner "remote-exec" {
     inline = [
       "chmod +x /tmp/init.sh",
       "/tmp/init.sh",
     ]
   }
+}
