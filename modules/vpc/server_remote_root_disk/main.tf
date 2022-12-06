@@ -92,25 +92,23 @@ resource "openstack_compute_instance_v2" "instance_1" {
    host = module.floatingip.floatingip_address
    private_key = "${file("~/.ssh/id_rsa")}"
 }
-  provisioner "remote-exec" {
-  inline = [
-"sudo apt-get -y update",
-"sudo apt-get -y install nginx",
-"sudo service nginx start",
-"rm -rf /var/www/html/index.html"
-]
-}
+# Working method, needs another one
+#  provisioner "remote-exec" {
+#  inline = [
+#"sudo apt-get -y update",
+#"sudo apt-get -y install nginx",
+#"sudo service nginx start",
+#"rm -rf /var/www/html/index.html"
+#]
+#}
   provisioner "file" {
-    content     = "<h1>Kokorin https://github.com/Zukimorimkato/terra</h1>"
-    destination = "/var/www/html/index.html"
+    content     = "init.sh"
+    destination = "/tmp/init.sh"
   }
 }
-
-module "floatingip" {
-  source = "../floatingip"
-}
-
-resource "openstack_networking_floatingip_associate_v2" "association_1" {
-  port_id     = openstack_networking_port_v2.port_1.id
-  floating_ip = module.floatingip.floatingip_address
-}
+provisioner "remote-exec" {
+    inline = [
+      "chmod +x /tmp/init.sh",
+      "/tmp/init.sh",
+    ]
+  }
