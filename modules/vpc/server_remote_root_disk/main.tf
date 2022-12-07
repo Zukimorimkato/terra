@@ -103,4 +103,11 @@ resource "openstack_compute_instance_v2" "instance_1" {
       "/tmp/init.sh",
     ]
   }
+  module "floatingip" {
+  source = "../floatingip"
+}
+
+resource "openstack_networking_floatingip_associate_v2" "association_1" {
+  port_id     = openstack_networking_port_v2.port_1.id
+  floating_ip = module.floatingip.floatingip_address
 }
