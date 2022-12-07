@@ -49,7 +49,7 @@ resource "openstack_blockstorage_volume_v3" "volume_1" {
 
 
 resource "openstack_compute_instance_v2" "instance_1" {
-  name              = var.server_name
+    name              = var.server_name
   flavor_id         = module.flavor.flavor_id
   key_pair          = module.keypair.keypair_name
   availability_zone = var.server_zone
@@ -103,6 +103,7 @@ resource "openstack_compute_instance_v2" "instance_1" {
       "/tmp/init.sh",
     ]
   }
+}
   module "floatingip" {
   source = "../floatingip"
 }
@@ -110,5 +111,4 @@ resource "openstack_compute_instance_v2" "instance_1" {
 resource "openstack_networking_floatingip_associate_v2" "association_1" {
   port_id     = openstack_networking_port_v2.port_1.id
   floating_ip = module.floatingip.floatingip_address
-}
 }
